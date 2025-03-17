@@ -55,7 +55,6 @@ def pokemon_capture(pokemon_id):
             habitat = 'Unknown'
 
         pokemon_data = {
-            'pokemon_id': id,
             'pokemon_name': name,
             'gender': gender,
             'types': types,
@@ -64,8 +63,8 @@ def pokemon_capture(pokemon_id):
             'habitat': habitat
         }
         insert_pokemon_data(pokemon_data)
-        return pokemon_data
+        return print(f"Pokemon {name} capturado!")
     else:
         return {"error": "Erro ao obter dados do Pokémon"}
 
-print(pokemon_capture(id))
+pokemon_capture(id)

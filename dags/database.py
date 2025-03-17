@@ -3,10 +3,11 @@ import psycopg2
 def connect_db():
     
     return psycopg2.connect(
-        host="localhost",        # ou o endereço do seu servidor PostgreSQL
-        database="pokemon_db",   # nome do banco de dados
-        user="postgres",        # seu usuário do PostgreSQL
-        password="senha" # sua senha do PostgreSQL
+        host="localhost",
+        port="5434",
+        database="pokemons",  
+        user="postgres",      
+        password="senha" 
     )
 
 def insert_pokemon_data(pokemon_data):
