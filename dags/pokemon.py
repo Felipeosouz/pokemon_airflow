@@ -1,6 +1,8 @@
 import requests
 import random
 
+from database import insert_pokemon_data
+
 id = random.randint(1, 1025)
 
 
@@ -52,7 +54,7 @@ def pokemon_capture(pokemon_id):
             evolutions = []
             habitat = 'Unknown'
 
-        return {
+        pokemon_data = {
             'pokemon_id': id,
             'pokemon_name': name,
             'gender': gender,
@@ -61,6 +63,8 @@ def pokemon_capture(pokemon_id):
             'evolution': evolutions,
             'habitat': habitat
         }
+        insert_pokemon_data(pokemon_data)
+        return pokemon_data
     else:
         return {"error": "Erro ao obter dados do Pokémon"}
 
