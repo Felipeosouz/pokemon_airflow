@@ -1,3 +1,5 @@
-venv
+venv/
 
 .env
+
+docker-compose.yml
