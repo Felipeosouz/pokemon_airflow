@@ -3,7 +3,7 @@ import random
 
 from database import insert_pokemon_data
 
-id = random.randint(1, 1025)
+#id = random.randint(1, 1025)
 
 
 def pokemon_capture(pokemon_id):
@@ -62,9 +62,10 @@ def pokemon_capture(pokemon_id):
             'evolution': evolutions,
             'habitat': habitat
         }
-        insert_pokemon_data(pokemon_data)
-        return print(f"Pokemon {name} capturado!")
+        #insert_pokemon_data(pokemon_data)
+        print(f"Pokemon {name} capturado!")
+        return pokemon_data
     else:
         return {"error": "Erro ao obter dados do Pokémon"}
 
-pokemon_capture(id)
+#pokemon_capture(id)

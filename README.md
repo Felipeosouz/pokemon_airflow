@@ -1,48 +1,53 @@
-Overview
-========
+# Pokémon Airflow Project
 
-Welcome to Astronomer! This project was generated after you ran 'astro dev init' using the Astronomer CLI. This readme describes the contents of the project, as well as how to run Apache Airflow on your local machine.
+## Visão Geral
 
-Project Contents
-================
+Bem-vindo ao projeto Pokémon Airflow! Este projeto foi gerado após a execução do comando `astro dev init` usando o Astronomer CLI. Este README descreve o conteúdo do projeto, bem como como executar o Apache Airflow em sua máquina local.
 
-Your Astro project contains the following files and folders:
+## Conteúdo do Projeto
 
-- dags: This folder contains the Python files for your Airflow DAGs. By default, this directory includes one example DAG:
-    - `example_astronauts`: This DAG shows a simple ETL pipeline example that queries the list of astronauts currently in space from the Open Notify API and prints a statement for each astronaut. The DAG uses the TaskFlow API to define tasks in Python, and dynamic task mapping to dynamically print a statement for each astronaut. For more on how this DAG works, see our [Getting started tutorial](https://www.astronomer.io/docs/learn/get-started-with-airflow).
-- Dockerfile: This file contains a versioned Astro Runtime Docker image that provides a differentiated Airflow experience. If you want to execute other commands or overrides at runtime, specify them here.
-- include: This folder contains any additional files that you want to include as part of your project. It is empty by default.
-- packages.txt: Install OS-level packages needed for your project by adding them to this file. It is empty by default.
-- requirements.txt: Install Python packages needed for your project by adding them to this file. It is empty by default.
-- plugins: Add custom or community plugins for your project to this file. It is empty by default.
-- airflow_settings.yaml: Use this local-only file to specify Airflow Connections, Variables, and Pools instead of entering them in the Airflow UI as you develop DAGs in this project.
+Seu projeto Astro contém os seguintes arquivos e pastas:
 
-Deploy Your Project Locally
-===========================
+- **dags**: Esta pasta contém os arquivos Python para seus DAGs do Airflow. Por padrão, este diretório inclui um DAG de exemplo:
+    - `pokemon_dag.py`: Este DAG captura dados de Pokémon da API PokeAPI e armazena no PostgreSQL.
+- **Dockerfile**: Este arquivo contém uma imagem Docker do Astro Runtime versionada que fornece uma experiência diferenciada do Airflow. Se você quiser executar outros comandos ou substituições em tempo de execução, especifique-os aqui.
+- **include**: Esta pasta contém quaisquer arquivos adicionais que você deseja incluir como parte do seu projeto. Está vazia por padrão.
+- **packages.txt**: Instale pacotes de nível de sistema operacional necessários para o seu projeto adicionando-os a este arquivo. Está vazio por padrão.
+- **requirements.txt**: Instale pacotes Python necessários para o seu projeto adicionando-os a este arquivo. Está vazio por padrão.
+- **plugins**: Adicione plugins personalizados ou da comunidade para o seu projeto neste arquivo. Está vazio por padrão.
+- **airflow_settings.yaml**: Use este arquivo apenas localmente para especificar Conexões, Variáveis e Pools do Airflow em vez de inseri-los na interface do Airflow enquanto você desenvolve DAGs neste projeto.
 
-1. Start Airflow on your local machine by running 'astro dev start'.
+## Executar o Projeto Localmente
 
-This command will spin up 4 Docker containers on your machine, each for a different Airflow component:
+1. Inicie o Airflow em sua máquina local executando `astro dev start`.
 
-- Postgres: Airflow's Metadata Database
-- Webserver: The Airflow component responsible for rendering the Airflow UI
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- Triggerer: The Airflow component responsible for triggering deferred tasks
+Este comando irá iniciar 4 contêineres Docker em sua máquina, cada um para um componente diferente do Airflow:
 
-2. Verify that all 4 Docker containers were created by running 'docker ps'.
+- **Postgres**: Banco de Dados de Metadados do Airflow
+- **Webserver**: O componente do Airflow responsável por renderizar a interface do Airflow
+- **Scheduler**: O componente do Airflow responsável por monitorar e acionar tarefas
+- **Triggerer**: O componente do Airflow responsável por acionar tarefas diferidas
 
-Note: Running 'astro dev start' will start your project with the Airflow Webserver exposed at port 8080 and Postgres exposed at port 5432. If you already have either of those ports allocated, you can either [stop your existing Docker containers or change the port](https://www.astronomer.io/docs/astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver).
+2. Verifique se todos os 4 contêineres Docker foram criados executando `docker ps`.
 
-3. Access the Airflow UI for your local Airflow project. To do so, go to http://localhost:8080/ and log in with 'admin' for both your Username and Password.
+Nota: Executar `astro dev start` iniciará seu projeto com o Webserver do Airflow exposto na porta 8080 e o Postgres exposto na porta 5432. Se você já tiver alguma dessas portas alocadas, você pode [parar seus contêineres Docker existentes ou alterar a porta](https://www.astronomer.io/docs/astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver).
 
-You should also be able to access your Postgres Database at 'localhost:5432/postgres'.
+3. Acesse a interface do Airflow para o seu projeto local do Airflow. Para fazer isso, vá para [http://localhost:8080/](http://localhost:8080/) e faça login com 'admin' para ambos o Nome de Usuário e a Senha.
 
-Deploy Your Project to Astronomer
-=================================
+Você também deve conseguir acessar seu Banco de Dados Postgres em 'localhost:5432/postgres'.
 
-If you have an Astronomer account, pushing code to a Deployment on Astronomer is simple. For deploying instructions, refer to Astronomer documentation: https://www.astronomer.io/docs/astro/deploy-code/
+## Estrutura do DAG
 
-Contact
-=======
+O DAG principal do projeto é `capture_pokemon_dag` localizado em [dags/pokemon_dag.py](dags/pokemon_dag.py). Este DAG captura dados de Pokémon da API PokeAPI e os armazena no banco de dados PostgreSQL.
 
-The Astronomer CLI is maintained with love by the Astronomer team. To report a bug or suggest a change, reach out to our support.
+## Testes
+
+Os testes para os DAGs estão localizados na pasta `tests/dags`. Por exemplo, o arquivo [tests/dags/test_dag_example.py](tests/dags/test_dag_example.py) contém testes de exemplo para garantir que todos os DAGs tenham tags, tentativas de reexecução definidas para dois e sem erros de importação.
+
+## Contato
+
+O Astronomer CLI é mantido com carinho pela equipe da Astronomer. Para relatar um bug ou sugerir uma alteração, entre em contato com nosso suporte.
+
+---
+
+Para mais informações, consulte a [documentação do Astronomer](https://www.astronomer.io/docs/astro/cli/develop-project#configure-airflow_settingsyaml-local-development-only).
